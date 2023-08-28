@@ -1,0 +1,18 @@
+---
+- name: Instalar Firefox y 7-Zip
+  hosts: mis_hosts
+  become: true
+
+  tasks:
+    - name: Actualizar caché de paquetes
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Instalar Firefox y 7-Zip
+      apt:
+        name:
+          - firefox
+          - p7zip-full
+        state: present
+      when: ansible_os_family == 'Debian'
